@@ -10,12 +10,13 @@ from models.state import State
 from models.user import User
 from models.review import Review
 
+# app_views.url_map.strict_slashes = False
+
 
 @app_views.route('/status')
 def check_status():
     """Return status"""
     return (jsonify({"status": "OK"}))
-
 
 @app_views.route('/stats')
 def count_object():
