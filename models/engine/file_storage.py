@@ -71,7 +71,7 @@ class FileStorage:
 
     def count(self, cls=None):
         """Counts the number of objects in storage"""
-        return (len(self.all(cls)))
+        return (len(models.storage.all(cls)))
 
     def get(self, cls, id):
         """A method to retrieve one object"""
