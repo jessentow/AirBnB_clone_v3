@@ -18,6 +18,7 @@ def check_status():
     """Return status"""
     return (jsonify({"status": "OK"}))
 
+
 @app_views.route('/stats')
 def count_object():
     """Retrieves the number of each object by type"""
@@ -25,7 +26,6 @@ def count_object():
             "states": 0, "users": 0}
 
     for key in data.keys():
-        print(key)
         if key == "amenities":
             data[key] = storage.count(Amenity)
         elif key == "states":
