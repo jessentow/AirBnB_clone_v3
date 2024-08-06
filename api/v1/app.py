@@ -22,7 +22,7 @@ def close_storage(exception):
 def page_not_found(e):
     """Handles 404 errors"""
     response = {"error": "Not found"}
-    return (jsonify(response), 404)
+    return (make_response(jsonify(response), 404))
 
 
 if __name__ == "__main__":
