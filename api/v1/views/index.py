@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Index of api"""
 from api.v1.views import app_views
-from flask import jsonify
+from flask import jsonify, make_response
 from models import storage
 
 
@@ -19,4 +19,4 @@ def count_object():
             "reviews": "Review", "states": "State", "users": "User"}
     for key, value in data.items():
         count_data[key] = storage.count(value)
-    return (jsonify(count_data))
+    return (make_response(jsonify(count_data)))
