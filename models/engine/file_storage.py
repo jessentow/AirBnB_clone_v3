@@ -75,14 +75,13 @@ class FileStorage:
         if cls:
             return (len(models.storage.all(cls)))
         else:
-            return (len(models.storage.all))
+            return (len(models.storage.all()))
 
     def get(self, cls, id):
         """A method to retrieve one object"""
         if cls is None:
             return (None)
         all_cls = self.all(cls)
-        # object_id = f'{str(cls).split(".")[-1][:-2]}.{id}'
         object_id = '{}.{}'.format(
             str(cls).split(".")[-1][:-2], id)
         if object_id:
