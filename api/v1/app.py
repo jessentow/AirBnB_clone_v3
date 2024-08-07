@@ -4,12 +4,14 @@ from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 from api.v1.views import state_views
+from api.v1.views import city_views
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.register_blueprint(app_views, url_prefix='/api/v1')
 app.register_blueprint(state_views, url_prefix='/api/v1/states')
+app.register_blueprint(city_views, url_prefix='/api/v1/cities')
 
 
 @app.teardown_appcontext
