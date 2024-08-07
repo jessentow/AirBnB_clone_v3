@@ -5,14 +5,7 @@ all default RESTFul API actions:
 from models.state import State
 from models import storage
 from api.v1.views import state_views
-from flask import jsonify, make_response
-
-
-@state_views.errorhandler(404)
-def page_not_found(e):
-    """Handles 404 errors"""
-    response = {"error": "Not found"}
-    return (make_response(jsonify(response), 404))
+from flask import jsonify, request, abort
 
 
 @state_views.route('/')
@@ -34,8 +27,7 @@ def get_state(state_id):
         current_state_id = current_state.get('id')
         if current_state_id == state_id:
             return (jsonify(current_state))
-
-    return (page_not_found(404))
+    abort(404)
 
 
 @state_views.route('/<state_id>', methods=['DELETE'])
@@ -50,5 +42,19 @@ def delete_state(state_id):
         if obj.id == state_id:
             storage.delete(obj)
             storage.save()
-            return (make_response(jsonify({}), 200))
-    return (page_not_found(404))
+            return (jsonify({}), 200)
+    abort(404)
+
+
+@state_views.route('/', methods=['POST'])
+def create_state():
+    """Creates a state object using POST"""
+    if not request.json:
+        abort(400, "Not a JSON")
+    data = request.get_json()
+    if "name" not in data:
+        abort(400, "Missing name")
+    new_state = State(**data)
+    storage.new(new_state)
+    storage.save()
+    return (jsonify(new_state.to_dict()), 201)

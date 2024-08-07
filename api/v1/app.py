@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Starts API and the main flask application"""
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 from api.v1.views import state_views
@@ -22,7 +22,7 @@ def close_storage(exception):
 def page_not_found(e):
     """Handles 404 errors"""
     response = {"error": "Not found"}
-    return (jsonify(response), 404)
+    return (make_response(jsonify(response), 404))
 
 
 if __name__ == "__main__":
