@@ -2,6 +2,7 @@
 """Creates a new view for State objects that handles
 all default RESTFul API actions:
 """
+
 from models.state import State
 from models import storage
 from api.v1.views import state_views
