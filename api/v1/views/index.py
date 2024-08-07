@@ -25,4 +25,4 @@ def count_object():
             "reviews": Review, "states": State, "users": User}
     for key, value in data.items():
         count_data[key] = storage.count(value)
-    return (make_response(jsonify(count_data)))
+    return (jsonify(count_data))
